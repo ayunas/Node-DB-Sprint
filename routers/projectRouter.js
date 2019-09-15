@@ -10,14 +10,13 @@ projectRouter.get('/', (req,res) => {
 
 projectRouter.get('/:id',  (req,res) => {
     DBHelper.getByID(req.params.id, 'projects')
-    .then(project => {
+    .then(async project => {
         if (project.length) {
-            DBHelper.get('tasks')
-            .then(tasks => {
-                tasks = tasks.filter(task => task.project_id == req.params.id);
-                res.status(200).json({...project, tasks});
-            })
-            .catch(err => res.status(500).json(err.message));
+            let resources = await DBHelper.get('resources');
+            resources = resources.filter(resource => resource.project_id == req.params.id);
+            let tasks = await DBHelper.get('tasks');
+            tasks = tasks.filter(task => task.project_id == req.params.id);
+            res.status(200).json({...project, tasks, resources});
         } else {
             res.status(404).json({missing : `Project with id #: ${req.params.id} not found`})
         }

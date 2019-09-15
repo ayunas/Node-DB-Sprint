@@ -15,7 +15,7 @@ exports.seed = function(knex) {
     })
     .then( () => {
       return knex('Resources').insert([
-        {id : 1, resource_name: 'Front End Developer', resource_description: 'Specializes in React Front End Development'},
+        {id : 1, resource_name: 'Front End Developer', resource_description: 'Specializes in React Front End Development' },
         {id : 2, resource_name: 'Data Engineer', resource_description: 'Specializes in Hadoop, Spark, and Scala'},
         {id : 3, resource_name: 'UX Designer', resource_description: 'Specializes in Designing Wire Frames for Landing Pages and Applications'}
       ])
@@ -26,5 +26,13 @@ exports.seed = function(knex) {
         {id: 2, project_id: 2, task_description: 'Devise Message Templates', task_notes: 'Google Research', completed: false},
         {id: 3, project_id: 2, task_description: 'Integrate TWILIO API for text messaging', task_notes: 'Register for a free account', completed: false}
       ])
-    });
+    })
+    .then(() => {
+      return knex('PR_Manager').insert([
+        {project_id : 2, resource_id : 1},
+        {project_id: 2, resource_id : 2},
+        {project_id: 2, resource_id : 3}
+      ])
+    })
+    ;
 };
