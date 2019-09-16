@@ -33,6 +33,5 @@ exports.seed = function(knex) {
         {project_id: 2, resource_id : 2},
         {project_id: 2, resource_id : 3}
       ])
-    })
-    ;
+    });
 };

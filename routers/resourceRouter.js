@@ -18,4 +18,14 @@ resourceRouter.get('/:id', (req,res) => {
     .catch(err => res.status(500).json(err.message))
 })
 
+resourceRouter.post('/:projID', (req,res) => {
+    const newResource = req.body;
+    // newResource.project_id = req.params.projID;
+    DB.addResToProj(newResource,req.params.projID)
+    .then(([resource]) => {
+        console.log('resource in router', resource);
+        res.status(201).json(resource)})
+    .catch(err => res.status(500).json(err.message));
+})
+
 module.exports = resourceRouter;

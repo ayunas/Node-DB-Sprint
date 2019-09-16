@@ -20,9 +20,10 @@ exports.up = function(knex) {
       tbl.boolean('completed').defaultTo(false);
   })
   .createTable('PR_Manager', tbl => {
+    //   tbl.increments();
+      tbl.integer('project_id').unsigned().references('id').inTable('Projects');
+      tbl.integer('resource_id').unsigned().references('id').inTable('Resources');
       tbl.primary(['project_id', 'resource_id']);
-      tbl.integer('project_id').unsigned().notNullable().references('id').inTable('Projects');
-      tbl.integer('resource_id').unsigned().notNullable().references('id').inTable('Resources');
   })
 };
 
